@@ -13,15 +13,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up JDK
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 17
 
-      - name: Generate Gradle Wrapper
-        run: |
-          gradle wrapper --gradle-version 8.5
+      # FIX → generate Gradle wrapper compatible with Android
+      - name: Generate Gradle Wrapper (Gradle 8.5)
+        uses: gradle/gradle-build-action@v2
+        with:
+          gradle-version: 8.5
+          arguments: wrapper
 
       - name: Make gradlew executable
         run: chmod +x gradlew
