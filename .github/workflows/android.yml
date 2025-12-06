@@ -1,10 +1,9 @@
-name: Android APK Build
+name: Build APK
 
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -17,21 +16,20 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
+          distribution: temurin
           java-version: 17
 
-      - name: Make gradlew executable
-        run: chmod +x gradlew
+      - name: Make Gradle executable
+        run: chmod +x ./gradlew
 
       - name: Build Debug APK
-        run: ./gradlew assembleDebug --stacktrace
+        run: ./gradlew assembleDebug
 
-      # Debug step - shows where APK was generated
-      - name: Find APKs
-        run: find app/build -type f -name "*.apk" -print
+      - name: List APKs
+        run: find . -type f -name "*.apk" -print
 
-      - name: Upload APK Artifact
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: AdBlockManager-debug
-          path: app/build/outputs/apk/debug/*.apk
+          path: "**/*.apk"
