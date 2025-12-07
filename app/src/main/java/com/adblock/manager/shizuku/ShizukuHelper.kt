@@ -2,8 +2,8 @@ package com.adblock.manager.shizuku
 
 import android.content.Context
 import android.content.pm.PackageManager
-import dev.rikka.shizuku.Shizuku
-import dev.rikka.shizuku.OnRequestPermissionResultListener
+import rikka.shizuku.Shizuku
+import rikka.shizuku.Shizuku.OnRequestPermissionResultListener
 
 object ShizukuHelper {
 
@@ -17,10 +17,10 @@ object ShizukuHelper {
         }
 
     fun initialize(context: Context) {
-        // Register listener once
+        // Register permission listener
         Shizuku.addRequestPermissionResultListener(permissionListener)
 
-        // Request permission if not granted
+        // Request permission if not already granted
         if (!isShizukuAvailable()) {
             Shizuku.requestPermission(0)
         }
@@ -31,8 +31,6 @@ object ShizukuHelper {
     }
 
     fun applyRules(pkgs: List<String>) {
-        // Example command
-        // Executes: "cmd package disable <package>"
         pkgs.forEach { pkg ->
             try {
                 Shizuku.newProcess(
