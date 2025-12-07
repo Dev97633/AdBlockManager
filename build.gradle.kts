@@ -1,11 +1,8 @@
+// Root build.gradle.kts — keep empty or only minimal config
+
 plugins {
-    // no root plugins needed
+    // no plugins here
 }
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        maven("https://repo.rikka.dev/releases/")
-    }
-}
+// No repositories here!
+// Repositories are already set in settings.gradle
