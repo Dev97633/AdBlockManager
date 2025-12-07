@@ -1,19 +1,2 @@
 buildscript {
-    repositories {
-        google()
-        mavenCentral()
-        maven { url 'https://repo.rikka.dev/releases/' }
-        maven { url 'https://rikka-repo.github.io/releases/' } // fallback
-        maven { url 'https://jitpack.io' }                     // fallback
-    }
-}
-
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        maven { url 'https://repo.rikka.dev/releases/' }
-        maven { url 'https://rikka-repo.github.io/releases/' } // fallback
-        maven { url 'https://jitpack.io' }                     // fallback
-    }
 }
