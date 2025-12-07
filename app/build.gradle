@@ -36,9 +36,16 @@ android {
 }
 
 dependencies {
+
+    // Rikka hidden API stub
     compileOnly "dev.rikka.hidden:stub:3.4.0"
 
-    // AndroidX / UI
+    // Shizuku (required for your ShizukuHelper.kt)
+    implementation "dev.rikka.shizuku:api:13.1.5"
+    implementation "dev.rikka.shizuku:provider:13.1.5"
+    implementation "dev.rikka.shizuku:aidl-hidden-api:13.1.5"
+
+    // AndroidX UI
     implementation "androidx.core:core-ktx:1.12.0"
     implementation "androidx.appcompat:appcompat:1.7.0"
     implementation "com.google.android.material:material:1.11.0"
@@ -50,5 +57,3 @@ dependencies {
     // Preferences
     implementation "androidx.preference:preference-ktx:1.2.1"
 }
-
-
