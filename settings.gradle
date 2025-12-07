@@ -1,2 +1,19 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://repo.rikka.dev/releases/' }
+        gradlePluginPortal()
+    }
+}
+
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://repo.rikka.dev/releases/' }
+    }
+}
+
 rootProject.name = "AdBlockManager"
 include(":app")
