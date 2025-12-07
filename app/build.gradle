@@ -37,8 +37,8 @@ android {
 
 dependencies {
 
-    // Hidden API stub (correct & available)
-    compileOnly "dev.rikka.hidden:stub:3.4.0"
+   
+    compileOnly "dev.rikka.hidden:api:4.3.0"
 
     // Shizuku (ALL 3 ARE CORRECT & AVAILABLE ON MAVEN CENTRAL)
     implementation "dev.rikka.shizuku:api:13.1.5"
