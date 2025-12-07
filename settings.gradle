@@ -3,7 +3,6 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
-        
     }
 }
 
@@ -12,8 +11,12 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+
+        // Main Rikka repo (for shizuku + hidden api)
+        maven { url "https://maven.rikka.app" }
+
+        // Optional mirror
         maven { url "https://storage.googleapis.com/rikka-repo" }
-        
     }
 }
 
