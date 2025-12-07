@@ -17,10 +17,10 @@ object ShizukuHelper {
         }
 
     fun initialize(context: Context) {
-        // Register listener
+        // Register listener once
         Shizuku.addRequestPermissionResultListener(permissionListener)
 
-        // Request permission if missing
+        // Request permission if not granted
         if (!isShizukuAvailable()) {
             Shizuku.requestPermission(0)
         }
@@ -31,8 +31,18 @@ object ShizukuHelper {
     }
 
     fun applyRules(pkgs: List<String>) {
-        // TODO: Implement rule commands here
-        // Example (Shizuku shell):
-        // val process = Shizuku.newProcess(arrayOf("cmd", "package", "disable", pkg), null, null)
+        // Example command
+        // Executes: "cmd package disable <package>"
+        pkgs.forEach { pkg ->
+            try {
+                Shizuku.newProcess(
+                    arrayOf("cmd", "package", "disable", pkg),
+                    null,
+                    null
+                )
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
     }
 }
