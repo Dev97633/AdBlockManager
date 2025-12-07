@@ -1,20 +1,27 @@
+
+
 pluginManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://repo.rikka.dev/releases/' }
+        maven { url 'https://rikka-repo.github.io/releases/' }
+        maven { url 'https://jitpack.io' }
         gradlePluginPortal()
-        maven { url "https://repo.rikka.dev/releases/" }
     }
 }
 
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+
     repositories {
         google()
         mavenCentral()
-        maven { url "https://repo.rikka.dev/releases/" }
+        maven { url 'https://repo.rikka.dev/releases/' }
+        maven { url 'https://rikka-repo.github.io/releases/' }
+        maven { url 'https://jitpack.io' }
     }
 }
 
 rootProject.name = "AdBlockManager"
-include(":app")
+include ':app'
