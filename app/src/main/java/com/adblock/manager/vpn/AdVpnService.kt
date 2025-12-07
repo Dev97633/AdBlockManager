@@ -1,18 +1,25 @@
 package com.adblock.manager.vpn
+
 import android.net.VpnService
 import android.os.ParcelFileDescriptor
 
-class AdVpnService:VpnService(){
-    private var vpn:ParcelFileDescriptor?=null
-    override fun onStartCommand(i:android.content.Intent?,f:Int,id:Int):Int{
-        startVPN()
-        return START_STICKY
+class AdVpnService : VpnService() {
+
+    private var vpnInterface: ParcelFileDescriptor? = null
+
+    override fun onCreate() {
+        super.onCreate()
+
+        val builder = Builder()
+        builder.setSession("AdBlock VPN")
+        builder.addAddress("10.0.0.2", 24)
+        builder.addDnsServer("8.8.8.8")
+
+        vpnInterface = builder.establish()
     }
-    private fun startVPN() {
-        val b=Builder()
-        b.addAddress("10.10.10.1",24)
-        b.addDnsServer("1.1.1.1")
-        b.addRoute("0.0.0.0",0)
-        vpn=b.establish()
+
+    override fun onDestroy() {
+        vpnInterface?.close()
+        super.onDestroy()
     }
 }
