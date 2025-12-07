@@ -1,13 +1,38 @@
 package com.adblock.manager.shizuku
+
 import android.content.Context
-import rikka.shizuku.Shizuku
+import android.content.pm.PackageManager
+import dev.rikka.shizuku.Shizuku
+import dev.rikka.shizuku.OnRequestPermissionResultListener
 
 object ShizukuHelper {
-    fun initialize(ctx:Context){
-        Shizuku.addRequestPermissionResultListener { _, _ -> }
-        if (!isShizukuAvailable()) Shizuku.requestPermission(0)
+
+    private val permissionListener =
+        OnRequestPermissionResultListener { requestCode, grantResult ->
+            if (grantResult == PackageManager.PERMISSION_GRANTED) {
+                // Shizuku permission granted
+            } else {
+                // Permission denied
+            }
+        }
+
+    fun initialize(context: Context) {
+        // Register listener
+        Shizuku.addRequestPermissionResultListener(permissionListener)
+
+        // Request permission if missing
+        if (!isShizukuAvailable()) {
+            Shizuku.requestPermission(0)
+        }
     }
-    fun isShizukuAvailable()=
-        Shizuku.checkSelfPermission()==android.content.pm.PackageManager.PERMISSION_GRANTED
-    fun applyRules(pkgs:List<String>) { /* TODO */ }
+
+    fun isShizukuAvailable(): Boolean {
+        return Shizuku.checkSelfPermission() == PackageManager.PERMISSION_GRANTED
+    }
+
+    fun applyRules(pkgs: List<String>) {
+        // TODO: Implement rule commands here
+        // Example (Shizuku shell):
+        // val process = Shizuku.newProcess(arrayOf("cmd", "package", "disable", pkg), null, null)
+    }
 }
