@@ -24,23 +24,17 @@ object ShizukuHelper {
         if (!isShizukuAvailable()) return
 
         try {
-            // Get binder from system_server (correct API)
-            val binder: IBinder = SystemServiceHelper.getSystemService("package")
-                ?: return
+            val binder: IBinder = SystemServiceHelper.getSystemService("package") ?: return
+            val pm = IPackageManager.Stub.asInterface(ShizukuBinderWrapper(binder))
 
-            // Wrap binder for Shizuku
-            val wrapped = ShizukuBinderWrapper(binder)
+            val userId = Shizuku.getUid() // Android 12+ required
 
-            // Convert binder → IPackageManager interface
-            val pm = IPackageManager.Stub.asInterface(wrapped)
-
-            // Disable the requested packages
             pkgs.forEach { pkg ->
                 pm.setApplicationEnabledSetting(
                     pkg,
                     PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                     0,
-                    0,
+                    userId,
                     "com.adblock.manager"
                 )
             }
