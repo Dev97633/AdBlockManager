@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">AdBlock Manager</string>
+    <string name="apply_rules">Apply AdBlock Rules</string>
+</resources>
