@@ -29,6 +29,27 @@ android {
     }
 }
 
+repositories {
+    google()
+    mavenCentral()
+
+    // Required for Shizuku
+    maven { url "https://api.github.com/repos/RikkaApps/Shizuku/releases" }
+}
+
 dependencies {
+    // Material 3 Theme (needed for Theme.Material3.*)
+    implementation "androidx.compose.material3:material3:1.2.1"
+
+    // You also added Material 1.x — keep it only if UI uses XML Material components
     implementation "com.google.android.material:material:1.11.0"
+
+    // Shizuku API
+    implementation "dev.rikka.shizuku:api:13.1.5"
+    implementation "dev.rikka.shizuku:provider:13.1.5"
+
+    // AndroidX Essentials
+    implementation "androidx.core:core-ktx:1.12.0"
+    implementation "androidx.appcompat:appcompat:1.7.0"
+    implementation "androidx.constraintlayout:constraintlayout:2.2.0"
 }
