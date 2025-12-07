@@ -8,12 +8,19 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      # Ensure Gradle wrapper files exist in repo
+      - name: Verify Gradle wrapper
+        run: |
+          if [ ! -f "gradlew" ] || [ ! -d "gradle/wrapper" ]; then
+            echo "❌ Gradle wrapper missing!"
+            exit 1
+          fi
 
       - name: Clean Gradle cache
         run: rm -rf ~/.gradle/caches
@@ -24,12 +31,12 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-
-      # FIX HERE 🔥
+      # MUST be before any gradle commands
       - name: Make gradlew executable
         run: chmod +x gradlew
+
+      - name: Setup Gradle caches
+        uses: gradle/gradle-build-action@v2
 
       - name: Clean project
         run: ./gradlew clean
