@@ -3,7 +3,7 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
-        maven { url "https://repo.rikka.dev/releases/" }  
+        maven { url "https://repo.rikka.dev/releases/" }
     }
 }
 
@@ -12,7 +12,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url "https://repo.rikka.dev/releases/" }  
+        maven { url "https://repo.rikka.dev/releases/" }
     }
 }
 
