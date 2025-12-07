@@ -37,15 +37,15 @@ android {
 
 dependencies {
 
-    // Rikka hidden API stub
+    // Hidden API stub (correct & available)
     compileOnly "dev.rikka.hidden:stub:3.4.0"
 
-    // Shizuku (required for your ShizukuHelper.kt)
+    // Shizuku (ALL 3 ARE CORRECT & AVAILABLE ON MAVEN CENTRAL)
     implementation "dev.rikka.shizuku:api:13.1.5"
     implementation "dev.rikka.shizuku:provider:13.1.5"
-    implementation "dev.rikka.shizuku:aidl-hidden-api:13.1.5"
+    implementation "dev.rikka.shizuku:aidl:13.1.5"   // <-- FIXED
 
-    // AndroidX UI
+    // AndroidX
     implementation "androidx.core:core-ktx:1.12.0"
     implementation "androidx.appcompat:appcompat:1.7.0"
     implementation "com.google.android.material:material:1.11.0"
