@@ -1,7 +1,19 @@
-// Root build.gradle (Groovy DSL)
-// REMOVE ALL REPOSITORIES — settings.gradle will handle everything
-
 buildscript {
-    // You can keep this empty or add only classpaths if needed
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://repo.rikka.dev/releases/' }
+        maven { url 'https://rikka-repo.github.io/releases/' } // fallback
+        maven { url 'https://jitpack.io' }                     // fallback
+    }
 }
 
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://repo.rikka.dev/releases/' }
+        maven { url 'https://rikka-repo.github.io/releases/' } // fallback
+        maven { url 'https://jitpack.io' }                     // fallback
+    }
+}
