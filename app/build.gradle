@@ -42,7 +42,7 @@ dependencies {
     implementation "dev.rikka.shizuku:provider:13.1.5"
 
     // Hidden API (correct)
-    compileOnly "dev.rikka.hidden:android-hidden-api:33"
+    compileOnly "dev.rikka.hidden:android-hidden-api:30"
 
     // AndroidX / UI
     implementation "androidx.core:core-ktx:1.12.0"
