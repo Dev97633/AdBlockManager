@@ -5,7 +5,7 @@ import android.content.pm.PackageManager
 import android.os.IBinder
 import rikka.shizuku.Shizuku
 import rikka.shizuku.ShizukuBinderWrapper
-import rikka.shizuku.ShizukuSystemServerClient
+import rikka.shizuku.SystemServiceHelper
 import android.content.pm.IPackageManager
 
 object ShizukuHelper {
@@ -24,17 +24,17 @@ object ShizukuHelper {
         if (!isShizukuAvailable()) return
 
         try {
-            // Get system_server binder
-            val binder: IBinder = ShizukuSystemServerClient.getSystemService("package")
+            // Get binder from system_server (correct API)
+            val binder: IBinder = SystemServiceHelper.getSystemService("package")
                 ?: return
 
-            // Wrap binder
+            // Wrap binder for Shizuku
             val wrapped = ShizukuBinderWrapper(binder)
 
-            // Create privileged PackageManager instance
+            // Convert binder → IPackageManager interface
             val pm = IPackageManager.Stub.asInterface(wrapped)
 
-            // Disable packages
+            // Disable the requested packages
             pkgs.forEach { pkg ->
                 pm.setApplicationEnabledSetting(
                     pkg,
