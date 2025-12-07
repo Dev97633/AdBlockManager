@@ -12,6 +12,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url "https://storage.googleapis.com/rikka-repo" }
         
     }
 }
