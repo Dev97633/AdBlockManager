@@ -2,27 +2,17 @@ package com.adblock.manager.shizuku
 
 import android.content.Context
 import android.content.pm.PackageManager
+import android.os.IBinder
 import rikka.shizuku.Shizuku
-import rikka.shizuku.Shizuku.OnRequestPermissionResultListener
+import rikka.shizuku.ShizukuBinderWrapper
+import rikka.shizuku.ShizukuSystemServerClient
+import android.content.pm.IPackageManager
 
 object ShizukuHelper {
 
-    private val permissionListener =
-        OnRequestPermissionResultListener { requestCode, grantResult ->
-            if (grantResult == PackageManager.PERMISSION_GRANTED) {
-                // Shizuku permission granted
-            } else {
-                // Permission denied
-            }
-        }
-
     fun initialize(context: Context) {
-        // Register permission listener
-        Shizuku.addRequestPermissionResultListener(permissionListener)
-
-        // Request permission if not already granted
-        if (!isShizukuAvailable()) {
-            Shizuku.requestPermission(0)
+        if (Shizuku.checkSelfPermission() != PackageManager.PERMISSION_GRANTED) {
+            Shizuku.requestPermission(1000)
         }
     }
 
@@ -31,16 +21,32 @@ object ShizukuHelper {
     }
 
     fun applyRules(pkgs: List<String>) {
-        pkgs.forEach { pkg ->
-            try {
-                Shizuku.newProcess(
-                    arrayOf("cmd", "package", "disable", pkg),
-                    null,
-                    null
+        if (!isShizukuAvailable()) return
+
+        try {
+            // Get system_server binder
+            val binder: IBinder = ShizukuSystemServerClient.getSystemService("package")
+                ?: return
+
+            // Wrap binder
+            val wrapped = ShizukuBinderWrapper(binder)
+
+            // Create privileged PackageManager instance
+            val pm = IPackageManager.Stub.asInterface(wrapped)
+
+            // Disable packages
+            pkgs.forEach { pkg ->
+                pm.setApplicationEnabledSetting(
+                    pkg,
+                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                    0,
+                    0,
+                    "com.adblock.manager"
                 )
-            } catch (e: Exception) {
-                e.printStackTrace()
             }
+
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 }
