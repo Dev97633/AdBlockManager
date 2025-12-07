@@ -1,13 +1,9 @@
-
-
 pluginManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://repo.rikka.dev/releases/' }
-        maven { url 'https://rikka-repo.github.io/releases/' }
-        maven { url 'https://jitpack.io' }
         gradlePluginPortal()
+        maven { url 'https://jitpack.io' }   // optional
     }
 }
 
@@ -17,9 +13,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://repo.rikka.dev/releases/' }
-        maven { url 'https://rikka-repo.github.io/releases/' }
-        maven { url 'https://jitpack.io' }
+        maven { url 'https://jitpack.io' }   // optional
     }
 }
 
