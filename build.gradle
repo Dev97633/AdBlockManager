@@ -1,0 +1,17 @@
+// Root build.gradle (Groovy DSL)
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://repo.rikka.dev/releases/' }
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://repo.rikka.dev/releases/' }
+    }
+}
