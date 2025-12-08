@@ -2,7 +2,6 @@ pluginManagement {
     repositories {
         google()
         mavenCentral()
-        jitpack()
         gradlePluginPortal()
     }
 }
@@ -12,9 +11,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        jitpack()
     }
 }
 
 rootProject.name = "AdBlockManager"
-include ':app'
+include(":app")
